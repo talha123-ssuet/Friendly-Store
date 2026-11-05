@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101827">
+<title>Friendly Store | 11.11 Smartwatch Sale</title>
+<style>
+:root{--navy:#101827;--ink:#172033;--gold:#f5c45e;--cream:#fffaf0;--muted:#687386;--pink:#ff718b}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;color:var(--ink);background:#f6f7fb}
+.hero{min-height:570px;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;color:white;overflow:hidden;background:#101827}
+.hero:before,.hero:after{content:"";position:absolute;inset:0;background-size:cover;background-position:center;animation:slides 18s infinite;opacity:.45}
+.hero:before{background-image:url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1800&q=85')}
+.hero:after{background-image:url('https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=1800&q=85');animation-delay:9s;opacity:0}
+@keyframes slides{0%,42%{opacity:.42}50%,92%{opacity:0}100%{opacity:.42}}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(120deg,rgba(8,15,30,.88),rgba(8,15,30,.35),rgba(8,15,30,.8));z-index:1}
+.hero-content{position:relative;z-index:2;padding:70px 20px;max-width:850px}
+.brand{font-size:15px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:800}
+.sale{font-size:clamp(58px,11vw,112px);line-height:.95;margin:22px 0 18px;font-weight:950;letter-spacing:-5px;text-shadow:0 8px 30px #0008}
+.sale span{color:var(--gold)}
+.hero p{font-size:clamp(16px,2.5vw,21px);color:#f2f4fa;line-height:1.6}
+.cta{display:inline-block;margin-top:18px;padding:15px 30px;border-radius:999px;background:var(--gold);color:#182033;text-decoration:none;font-weight:900;box-shadow:0 8px 24px #0004;transition:.2s}
+.cta:hover{transform:translateY(-3px);background:#ffd77e}
+nav{position:sticky;top:0;z-index:10;background:#101827ed;backdrop-filter:blur(12px);display:flex;justify-content:space-between;align-items:center;padding:14px max(5%,calc((100% - 1150px)/2));color:white}
+nav strong{font-size:20px}nav a{color:white;text-decoration:none;margin-left:18px;font-size:14px}
+section{padding:65px 5%;max-width:1250px;margin:auto}
+.section-title{text-align:center;font-size:clamp(28px,4vw,42px);margin:0 0 10px;color:var(--navy)}
+.section-sub{text-align:center;color:var(--muted);margin:0 auto 35px;max-width:600px}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:24px}
+.product{background:white;border-radius:22px;overflow:hidden;box-shadow:0 12px 35px #17203312;transition:.25s;border:1px solid #edf0f5}
+.product:hover{transform:translateY(-7px);box-shadow:0 18px 40px #17203320}
+.product img{width:100%;height:235px;object-fit:cover;background:#eef1f5}
+.product-info{padding:20px}.product h3{margin:0 0 8px;font-size:20px}.desc{color:var(--muted);font-size:14px;line-height:1.55;min-height:44px}
+.price{font-size:24px;font-weight:900;color:#d18b13;margin:14px 0}
+.order{display:block;text-align:center;text-decoration:none;background:#159b69;color:white;padding:12px;border-radius:12px;font-weight:800}
+.order:hover{background:#087b51}
+.empty{text-align:center;padding:35px;color:var(--muted);grid-column:1/-1}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin-top:35px}
+.feature{background:#fff;border-radius:18px;padding:22px;text-align:center;box-shadow:0 8px 24px #1720330b}
+.feature b{display:block;font-size:18px;margin:8px 0}.feature span{color:var(--muted);font-size:14px}
+footer{background:var(--navy);color:#dce3ee;text-align:center;padding:35px 15px}
+footer strong{color:var(--gold)}
+.admin-launch{position:fixed;right:18px;bottom:18px;z-index:20;border:0;border-radius:50px;background:#172033;color:white;padding:13px 19px;font-weight:800;box-shadow:0 8px 25px #0003;cursor:pointer}
+.modal{display:none;position:fixed;inset:0;background:#08101dcc;z-index:30;align-items:center;justify-content:center;padding:16px;overflow:auto}
+.modal.show{display:flex}.panel{background:white;width:min(620px,100%);max-height:92vh;overflow:auto;border-radius:20px;padding:25px;box-shadow:0 20px 70px #0005}
+.panel h2{margin:0 0 8px}.panel label{display:block;font-weight:700;font-size:13px;margin:13px 0 6px}
+.panel input,.panel textarea{width:100%;padding:12px;border:1px solid #d9deea;border-radius:10px;font:inherit}
+.panel textarea{min-height:80px;resize:vertical}.panel button{border:0;padding:11px 16px;border-radius:10px;font-weight:800;cursor:pointer;margin:8px 6px 0 0}
+.primary{background:#172033;color:white}.gold{background:var(--gold);color:#172033}.danger{background:#ffe7e9;color:#b42336}.secondary{background:#eef1f6;color:#253047}
+.admin-list{margin-top:20px}.admin-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #eee}.admin-row span{font-weight:700}
+.hint{font-size:12px;color:#778196;line-height:1.5}.error{color:#c62828;font-size:13px;min-height:18px}
+.hidden{display:none!important}
+@media(max-width:600px){.hero{min-height:500px}.sale{letter-spacing:-3px}nav{padding:13px 16px}nav a{margin-left:10px;font-size:12px}section{padding:48px 17px}.product img{height:220px}}
+</style>
+</head>
+<body>
+<nav><strong>⌚ Friendly Store</strong><div><a href="#watches">Watches</a><a href="#why">Why us?</a></div></nav>
+<header class="hero">
+  <div class="hero-shade"></div>
+  <div class="hero-content">
+    <div class="brand">Friendly Store • Smartwatch Collection</div>
+    <h1 class="sale">11.11 <span>OFFER</span></h1>
+    <p>Upgrade your everyday style. Discover smartwatches that keep you connected, active and looking great.</p>
+    <a class="cta" href="#watches">Shop Smartwatches</a>
+  </div>
+</header>
+<section id="watches">
+  <h2 class="section-title">Find Your Perfect Watch</h2>
+  <p class="section-sub">Explore our latest smartwatch collection. Choose your favourite and order directly on WhatsApp.</p>
+  <div class="products" id="productGrid"></div>
+  <div class="features" id="why">
+    <div class="feature">🚚<b>Easy Ordering</b><span>Order directly through WhatsApp.</span></div>
+    <div class="feature">⌚<b>Smart Style</b><span>Everyday technology with a modern look.</span></div>
+    <div class="feature">💬<b>Friendly Support</b><span>Contact us for product details and help.</span></div>
+  </div>
+</section>
+<footer><strong>Friendly Store</strong><p>Smart style. Friendly service.</p><p>Order on WhatsApp: 0325 3291924</p><small>© <span id="year"></span> Friendly Store</small></footer>
+
+<button class="admin-launch" onclick="openAdmin()">🔐 Admin Login</button>
+<div class="modal" id="adminModal" role="dialog" aria-modal="true" aria-label="Admin panel">
+ <div class="panel">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><h2>Friendly Store Admin</h2><button class="secondary" onclick="closeAdmin()">✕</button></div>
+  <div id="loginBox">
+   <p class="hint">Login to add or remove products.</p>
+   <label for="adminPassword">Admin password</label><input id="adminPassword" type="password" placeholder="Enter password">
+   <div class="error" id="loginError"></div><button class="primary" onclick="login()">Login</button>
+  </div>
+  <div id="manageBox" class="hidden">
+   <p class="hint">Add a smartwatch below. You can choose an image from your phone/computer.</p>
+   <form id="productForm">
+    <label for="pName">Product name</label><input id="pName" required maxlength="70" placeholder="e.g. Ultra Smart Watch">
+    <label for="pPrice">Price (PKR)</label><input id="pPrice" type="number" min="1" required placeholder="e.g. 2500">
+    <label for="pDesc">Description</label><textarea id="pDesc" required maxlength="500" placeholder="Write product details..."></textarea>
+    <label for="pImage">Product picture</label><input id="pImage" type="file" accept="image/*" required>
+    <button class="gold" type="submit">＋ Add Product</button>
+   </form>
+   <div class="admin-list"><h3>Your products</h3><div id="adminProducts"></div></div>
+   <button class="secondary" onclick="logout()">Logout</button>
+   <p class="hint">Products are saved in this browser on this device. Keep a backup of your pictures.</p>
+  </div>
+  <p class="hint" style="margin-top:18px">Security note: this is a simple single-file demo. The password is stored in the HTML source, so it is not secure for a public business website. Use a proper server login before collecting sensitive information.</p>
+ </div>
+</div>
+<script>
+const ADMIN_PASSWORD = "Talha@2025";
+const WHATSAPP_NUMBER = "923253291924";
+const STORAGE_KEY = "friendlyStoreProducts_v1";
+const starterProducts = [
+ {id:"sample1",name:"Classic Smart Watch",price:2499,description:"A stylish smartwatch for everyday use. Message us for features and availability.",image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=85"},
+ {id:"sample2",name:"Sport Smart Watch",price:2999,description:"A sporty look for your active lifestyle. Contact us for complete details.",image:"https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=900&q=85"},
+ {id:"sample3",name:"Premium Smart Watch",price:3499,description:"A modern design that looks great with your everyday outfit.",image:"https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=900&q=85"}
+];
+let products = loadProducts();
+function loadProducts(){try{const saved=localStorage.getItem(STORAGE_KEY);return saved?JSON.parse(saved):starterProducts}catch(e){return starterProducts}}
+function saveProducts(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(products))}catch(e){alert("Storage is full. Try a smaller image.");}}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function renderProducts(){
+ const grid=document.getElementById("productGrid");
+ if(!products.length){grid.innerHTML='<div class="empty">No watches available right now. Please check back soon.</div>';return}
+ grid.innerHTML=products.map(p=>`<article class="product"><img src="${p.image}" alt="${escapeHTML(p.name)}" loading="lazy"><div class="product-info"><h3>${escapeHTML(p.name)}</h3><div class="desc">${escapeHTML(p.description)}</div><div class="price">Rs. ${Number(p.price).toLocaleString("en-PK")}</div><a class="order" target="_blank" rel="noopener" href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Assalam o Alaikum! I want to order: "+p.name+" - Rs. "+p.price)}">Order Now on WhatsApp</a></div></article>`).join("");
+}
+function openAdmin(){document.getElementById("adminModal").classList.add("show");document.getElementById("loginError").textContent="";document.getElementById("adminPassword").value=""}
+function closeAdmin(){document.getElementById("adminModal").classList.remove("show")}
+function login(){if(document.getElementById("adminPassword").value===ADMIN_PASSWORD){document.getElementById("loginBox").classList.add("hidden");document.getElementById("manageBox").classList.remove("hidden");renderAdmin()}else{document.getElementById("loginError").textContent="Incorrect password. Please try again."}}
+function logout(){document.getElementById("manageBox").classList.add("hidden");document.getElementById("loginBox").classList.remove("hidden")}
+function renderAdmin(){const el=document.getElementById("adminProducts");el.innerHTML=products.length?products.map(p=>`<div class="admin-row"><span>${escapeHTML(p.name)} — Rs. ${Number(p.price).toLocaleString("en-PK")}</span><button class="danger" onclick="deleteProduct('${p.id}')">Delete</button></div>`).join(""):"<p class='hint'>No products added yet.</p>"}
+function deleteProduct(id){if(confirm("Delete this product?")){products=products.filter(p=>p.id!==id);saveProducts();renderProducts();renderAdmin()}}
+document.getElementById("productForm").addEventListener("submit",e=>{
+ e.preventDefault();const file=document.getElementById("pImage").files[0];if(!file)return;
+ if(!file.type.startsWith("image/")){alert("Please choose an image file.");return}
+ if(file.size>2*1024*1024){alert("Please choose an image smaller than 2 MB.");return}
+ const reader=new FileReader();reader.onload=()=>{products.unshift({id:"p"+Date.now(),name:document.getElementById("pName").value.trim(),price:Number(document.getElementById("pPrice").value),description:document.getElementById("pDesc").value.trim(),image:reader.result});saveProducts();renderProducts();renderAdmin();e.target.reset();alert("Product added!")};reader.readAsDataURL(file);
+});
+document.getElementById("adminModal").addEventListener("click",e=>{if(e.target.id==="adminModal")closeAdmin()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeAdmin()});
+document.getElementById("year").textContent=new Date().getFullYear();
+renderProducts();
+</script>
+</body>
+</html>
